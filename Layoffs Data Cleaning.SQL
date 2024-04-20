@@ -11,8 +11,7 @@ SELECT *
 FROM world_layoffs.layoffs;
 
 
-
--- first thing we want to do is create a staging table. This is the one we will work in and clean the data. We want a table with the raw data in case something happens
+-- Create staging table to work on and clean the data
 CREATE TABLE world_layoffs.layoffs_staging 
 LIKE world_layoffs.layoffs;
 
@@ -21,16 +20,16 @@ SELECT * FROM world_layoffs.layoffs;
 
 
 -- now when we are data cleaning we usually follow a few steps
--- 1. check for duplicates and remove any
--- 2. standardize data and fix errors
--- 3. Look at null values and see what 
--- 4. remove any columns and rows that are not necessary - few ways
+-- 1. Duplicates
+-- 2. Standardize data and fix errors
+-- 3. Look at null values 
+-- 4. Remove any columns and rows that are not necessary
 
 
 
 -- 1. Remove Duplicates
 
-# First let's check for duplicates
+# Check for duplicates
 
 
 
@@ -63,7 +62,7 @@ SELECT *
 FROM world_layoffs.layoffs_staging
 WHERE company = 'Oda'
 ;
--- it looks like these are all legitimate entries and shouldn't be deleted. We need to really look at every single row to be accurate
+-- it looks like these are all legitimate entries and shouldn't be deleted.
 
 -- these are our real duplicates 
 SELECT *
@@ -111,8 +110,8 @@ WHERE (company, location, industry, total_laid_off, percentage_laid_off, `date`,
 	FROM DELETE_CTE
 ) AND row_num > 1;
 
--- one solution, which I think is a good one. Is to create a new column and add those row numbers in. Then delete where row numbers are over 2, then delete that column
--- so let's do it!!
+-- Create a new column and add those row numbers in. Then delete where row numbers are over 2, then delete that column
+
 
 ALTER TABLE world_layoffs.layoffs_staging ADD row_num INT;
 
