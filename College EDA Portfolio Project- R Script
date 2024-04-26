@@ -73,8 +73,6 @@ plot(model_top)
 
 
 
-# Inset plot from YouTube thumbnail
-
 ggplot(College, aes(x = log10(F.Undergrad),
                     y = Grad.Rate,
                     color = Private)) + 
