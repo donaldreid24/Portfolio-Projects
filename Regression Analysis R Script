@@ -2,7 +2,7 @@ library(tidyverse)
 library(broom)
 library(GGally)
 
-# Data from Regression Analysis by Example
+# Data from Regression Analysis 
 # by Chatterjee and Hadi (set P060)
 
 performance <- read_csv("performance.csv")
